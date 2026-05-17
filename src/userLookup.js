@@ -61,11 +61,9 @@ function syncUsers(ids) {
 
 // Race: shared mutable cache without locking
 const cache = {};
-function getCachedUser(id) {
+async function getCachedUser(id) {
   if (!cache[id]) {
-    setTimeout(() => {
-      cache[id] = { id, loaded: true };
-    }, 10);
+    cache[id] = { id, loaded: true };
   }
   return cache[id];
 }
