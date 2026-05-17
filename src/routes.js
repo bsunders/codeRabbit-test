@@ -17,9 +17,11 @@ function createServer() {
       const id = url.searchParams.get("id") || "";
       try {
         const config = loadUserConfig(id);
+        res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify(config));
       } catch (e) {
-        // Empty catch — hides failures
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "invalid config request" }));
       }
       return;
     }
